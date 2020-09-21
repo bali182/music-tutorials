@@ -1,4 +1,5 @@
 import { ComponentType } from 'react'
+import { IntervalComparison } from '../pages/IntervalComparison'
 import { allWithQualifiedIds, flattenRoutes } from './routeUtils'
 
 export type RouteDescriptor = {
@@ -28,7 +29,7 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
         label: 'Ear training',
         children: [
           { id: 'custom-practice', label: 'Custom practice' },
-          { id: 'major-and-minor-seconds', label: 'Major and minor seconds' },
+          { id: 'major-and-minor-seconds', label: 'Major and minor seconds', component: IntervalComparison },
           { id: 'major-and-minor-thirds', label: 'Major and minor thirds' },
           { id: 'seconds-and-thirds', label: 'Seconds and thirds' },
           { id: 'perfect-fourth-and-fifth', label: 'Perfect fourth and fifth' },

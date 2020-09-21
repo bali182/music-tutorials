@@ -13,8 +13,9 @@ export const colors = {
   brown: '#502419',
 
   lightGreen: '#eaebc3',
-  darkGray: '#4C5B5C',
   lightGray: '#a1b0b1',
+  gray: '#4C5B5C',
+  darkGray: '#252d2e',
 
   white: '#fff',
   transparent: 'transparent',
