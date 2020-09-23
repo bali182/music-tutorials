@@ -1,7 +1,6 @@
 import { css } from 'emotion'
 import React, { PureComponent } from 'react'
 import { spacing } from '../constants'
-import { range } from 'lodash'
 import { IntervalButton } from './IntervalButton'
 
 const intervalsStyle = css({

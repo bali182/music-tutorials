@@ -14,11 +14,11 @@ import { CardTitle } from '../ux/CardTitle'
 import { colors, spacing } from '../ux/constants'
 import { Intervals } from '../ux/Intervals/Intervals'
 
-type IntervalComparisonProps = {
+type IntervalEarTrainingPageProps = {
   intervals: number[]
 }
 
-type IntervalComparisonState = {
+type IntervalEarTrainingPageState = {
   sequence: Sequence
   interval: number
   guesses: number[]
@@ -55,11 +55,13 @@ const nextButtonStyle = css({
   flexBasis: '1px',
 })
 
-const playButtonLabelStyle = css({ marginLeft: spacing.s })
+const playButtonLabelStyle = css({
+  marginLeft: spacing.s,
+})
 
-export class IntervalComparison extends PureComponent<IntervalComparisonProps, IntervalComparisonState> {
+export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPageProps, IntervalEarTrainingPageState> {
   private synth: PolySynth = createDefaultSynth()
-  state: IntervalComparisonState = this.getNextState()
+  state: IntervalEarTrainingPageState = this.getNextState()
 
   private playInterval = () => playSequence(this.state.sequence)
 
@@ -77,6 +79,11 @@ export class IntervalComparison extends PureComponent<IntervalComparisonProps, I
     start()
     Transport.start()
     Transport.bpm.value = 30
+  }
+
+  componentWillUnmount() {
+    this.state.sequence.stop()
+    this.state.sequence.dispose()
   }
 
   render() {
@@ -117,12 +124,12 @@ export class IntervalComparison extends PureComponent<IntervalComparisonProps, I
     )
   }
 
-  private getNextState(): IntervalComparisonState {
+  private getNextState(): IntervalEarTrainingPageState {
     const interval = sample(this.props.intervals)
     return {
       interval,
       guesses: [],
-      sequence: createRandomInterval(interval, 'a3')(this.synth),
+      sequence: createRandomInterval(interval)(this.synth),
     }
   }
 }

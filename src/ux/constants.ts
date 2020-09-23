@@ -26,6 +26,7 @@ export const gradients = {
 }
 
 export const spacing = {
+  xxs: '6px',
   xs: '8px',
   s: '12px',
   m: '16px',
