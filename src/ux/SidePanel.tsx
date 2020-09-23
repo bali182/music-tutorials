@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react'
 import { css } from 'emotion'
-import { colors, spacing, shadow } from './constants'
+import { colors, spacing, shadow, gradients } from './constants'
 
 type SidePanelProps = {
   children: ReactNode
@@ -15,11 +15,12 @@ const sidePanelStyle = css({
   background: colors.white,
   boxShadow: shadow.default,
   borderRightColor: colors.lightGray,
-  borderRightWidth: '1px',
   borderRightStyle: 'solid',
-  width: '250px',
+  width: '300px',
   height: '100vh !important',
-  overflowY: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  zIndex: 1,
 })
 
 export class SidePanel extends PureComponent<SidePanelProps, SidePanelState> {

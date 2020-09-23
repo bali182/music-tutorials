@@ -12,20 +12,16 @@ export function createSequence(synth: PolySynth, notes: AudioNote[]): Sequence {
   })
 }
 
-export function playSequence(sequence: Sequence, bpm: number = 30) {
-  start()
-  Transport.cancel()
+export function playSequence(sequence: Sequence) {
   Transport.stop()
-  Transport.bpm.value = bpm
+  sequence.stop()
   Transport.start()
   sequence.start()
 }
 
-export const createRandomInterval = (allowedIntervals: number[] = range(0, 12), scaleRoot: string = 'c4') => (
-  synth: PolySynth
-): Sequence => {
+export const createRandomInterval = (range: number, scaleRoot: string = 'c4') => (synth: PolySynth): Sequence => {
   const scale = Scale.get(`${scaleRoot} chromatic`)
-  const interval = Interval.fromSemitones(sample(allowedIntervals))
+  const interval = Interval.fromSemitones(range)
   const noteA = sample(scale.notes)
   const noteB = Note.transpose(noteA, interval)
   const sequence = createSequence(synth, [

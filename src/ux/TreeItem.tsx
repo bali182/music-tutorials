@@ -1,6 +1,6 @@
 import React, { Fragment, PureComponent, ReactNode } from 'react'
 import { css, Interpolation } from 'emotion'
-import { colors, spacing } from './constants'
+import { colors, spacing, transition } from './constants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronRight, faGuitar } from '@fortawesome/free-solid-svg-icons'
 
@@ -16,36 +16,41 @@ type TreeItemProps = {
   onSelect: (id: string) => void
 }
 
-const iconStyle = css({
-  label: 'treeItem-icon',
-  marginRight: spacing.xs,
-})
+const iconStyle = (isActive: boolean) =>
+  css({
+    label: 'treeItem-icon',
+    marginRight: spacing.xs,
+    path: {
+      color: isActive ? colors.white : 'inherit',
+    },
+  })
 
-const labelStyle = css({
-  display: 'inline-block',
-  label: 'treeItem-label',
-})
-
-const activeLabelStyle: Interpolation = {
-  color: colors.blue,
-  fontWeight: 'bold',
-  textDecoration: 'underline',
-}
+const labelStyle = (isActive: boolean) =>
+  css({
+    display: 'inline-block',
+    label: 'treeItem-label',
+    color: isActive ? colors.white : 'inherit',
+  })
 
 const treeItemStyle = (level: number, isActive: boolean) =>
   css({
     label: 'treeItem',
-    paddingLeft: `calc(${level} * ${spacing.m})`,
+    padding: spacing.s,
+    marginLeft: `calc(${level} * ${spacing.m})`,
     display: 'flex',
     flexDirection: 'row',
-    marginTop: spacing.s,
-    marginBottom: spacing.s,
+    color: isActive ? colors.white : 'inherit',
     cursor: 'pointer',
+    borderRadius: spacing.l,
+    backgroundColor: isActive ? colors.blue : colors.transparent,
+    transition: transition.default,
     flexShrink: 0,
     ':hover': {
-      [`.${labelStyle}`]: activeLabelStyle,
+      [`.${labelStyle}`]: {
+        color: isActive ? colors.white : colors.blue,
+        fontWeight: 'bold',
+      },
     },
-    ...(isActive ? { [`.${labelStyle}`]: activeLabelStyle } : {}),
   })
 
 export class TreeItem extends PureComponent<TreeItemProps> {
@@ -59,15 +64,15 @@ export class TreeItem extends PureComponent<TreeItemProps> {
   }
 
   private renderIcon() {
-    const { isParent, isOpen } = this.props
+    const { isParent, isOpen, isActive } = this.props
     const icon = !isParent ? faGuitar : isOpen ? faChevronDown : faChevronRight
-    return <FontAwesomeIcon className={iconStyle} icon={icon} onClick={this.onArrowClick} />
+    return <FontAwesomeIcon className={iconStyle(isActive)} icon={icon} onClick={this.onArrowClick} />
   }
 
   private renderLabel() {
-    const { label } = this.props
+    const { label, isActive } = this.props
     return (
-      <div className={labelStyle} onClick={this.onLabelClick}>
+      <div className={labelStyle(isActive)} onClick={this.onLabelClick}>
         {label}
       </div>
     )
@@ -79,7 +84,7 @@ export class TreeItem extends PureComponent<TreeItemProps> {
   }
 
   render() {
-    const { level, label, isActive } = this.props
+    const { level, isActive } = this.props
     return (
       <Fragment>
         <div className={treeItemStyle(level, isActive)}>

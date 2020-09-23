@@ -1,29 +1,128 @@
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { css } from 'emotion'
+import { sample } from 'lodash'
 import React, { PureComponent } from 'react'
-import { PolySynth, Sequence } from 'tone'
+import { PolySynth, Sequence, start, Transport } from 'tone'
 import { createDefaultSynth } from '../audio/defaultSynth'
 import { createRandomInterval, playSequence } from '../audio/sequence'
-import { Button } from '../ux/Button'
+import { Button, ButtonKind } from '../ux/Button'
+import { Card } from '../ux/Card'
+import { CardContent, ContentDirection } from '../ux/CardContent'
+import { CardHeader } from '../ux/CardHeader'
+import { CardTitle } from '../ux/CardTitle'
+import { colors, spacing } from '../ux/constants'
+import { Intervals } from '../ux/Intervals/Intervals'
+
+type IntervalComparisonProps = {
+  intervals: number[]
+}
 
 type IntervalComparisonState = {
   sequence: Sequence
-  name: string
+  interval: number
+  guesses: number[]
 }
 
-export class IntervalComparison extends PureComponent {
-  private synth: PolySynth = createDefaultSynth(4)
-  private sequence: Sequence = createRandomInterval([1, 2], 'a3')(this.synth)
+const intervalContainerStyle = css({
+  width: '60vw',
+  marginBottom: spacing.l,
+})
 
-  private playPiano = () => {
-    this.sequence.dispose()
-    this.sequence = createRandomInterval([1, 2], 'a3')(this.synth)
-    playSequence(this.sequence)
+const tutorialStyle = css({
+  listStyleType: 'disc',
+  width: '100%',
+  padding: spacing.s,
+  paddingLeft: spacing.l,
+})
+
+const buttonRowStyle = css({
+  display: 'flex',
+  flexDirection: 'row',
+  width: '100%',
+})
+
+const playButtonStyle = css({
+  flexGrow: 1,
+  flexShrink: 1,
+  flexBasis: '1px',
+  marginRight: spacing.s,
+})
+
+const nextButtonStyle = css({
+  flexGrow: 1,
+  flexShrink: 1,
+  flexBasis: '1px',
+})
+
+const playButtonLabelStyle = css({ marginLeft: spacing.s })
+
+export class IntervalComparison extends PureComponent<IntervalComparisonProps, IntervalComparisonState> {
+  private synth: PolySynth = createDefaultSynth()
+  state: IntervalComparisonState = this.getNextState()
+
+  private playInterval = () => playSequence(this.state.sequence)
+
+  private onGuess = (interval: number) => {
+    this.setState({ guesses: this.state.guesses.concat([interval]) })
+  }
+
+  private onNext = () => {
+    this.state.sequence.stop()
+    this.state.sequence.dispose()
+    this.setState(this.getNextState())
+  }
+
+  componentDidMount() {
+    start()
+    Transport.start()
+    Transport.bpm.value = 30
   }
 
   render() {
+    const { guesses, interval } = this.state
+    const { intervals } = this.props
+    const correctGuess = guesses.indexOf(interval) >= 0
     return (
-      <div>
-        <Button onClick={this.playPiano}>Play interval</Button>
-      </div>
+      <Card>
+        <CardHeader color={colors.blue}>
+          <CardTitle>Intervals</CardTitle>
+        </CardHeader>
+        <CardContent direction={ContentDirection.Vertical}>
+          <ul className={tutorialStyle}>
+            <li>Listen to the interval, and pick the correct one from below!</li>
+            <li>Try playing it on your instrument!</li>
+            <li>Try humming/singing along!</li>
+          </ul>
+        </CardContent>
+        <CardContent direction={ContentDirection.Vertical}>
+          <div className={intervalContainerStyle}>
+            <Intervals correctInterval={interval} intervals={intervals} guesses={guesses} onGuess={this.onGuess} />
+          </div>
+          <div className={buttonRowStyle}>
+            <Button onClick={this.playInterval} className={playButtonStyle} kind={ButtonKind.Secondary}>
+              <FontAwesomeIcon icon={faVolumeUp} />
+              <span className={playButtonLabelStyle}>Play interval</span>
+            </Button>
+            <Button
+              onClick={this.onNext}
+              className={nextButtonStyle}
+              disabled={!correctGuess}
+              kind={ButtonKind.Primary}>
+              <span className={playButtonLabelStyle}>Next interval</span>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     )
+  }
+
+  private getNextState(): IntervalComparisonState {
+    const interval = sample(this.props.intervals)
+    return {
+      interval,
+      guesses: [],
+      sequence: createRandomInterval(interval, 'a3')(this.synth),
+    }
   }
 }

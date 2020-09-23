@@ -21,6 +21,10 @@ export const colors = {
   transparent: 'transparent',
 }
 
+export const gradients = {
+  greenToBlue: 'linear-gradient(160deg, #08AEEA 0%, #2AF598 100%)',
+}
+
 export const spacing = {
   xs: '8px',
   s: '12px',
@@ -29,5 +33,10 @@ export const spacing = {
 }
 
 export const shadow = {
-  default: '0px 0px 15px 0px rgba(0,0,0,0.5);',
+  small: '0px 0px 2px 0px rgba(0,0,0,0.3);',
+  default: '0px 0px 15px 0px rgba(0,0,0,0.3);',
+}
+
+export const transition = {
+  default: 'all .4s cubic-bezier(0.175, 0.885, 0, 1)',
 }
