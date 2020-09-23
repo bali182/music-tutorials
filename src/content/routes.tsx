@@ -28,7 +28,6 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
         id: 'ear-training',
         label: 'Ear training',
         children: [
-          { id: 'custom-practice', label: 'Custom practice' },
           {
             id: 'major-and-minor-seconds',
             label: 'Major and minor 2nd',

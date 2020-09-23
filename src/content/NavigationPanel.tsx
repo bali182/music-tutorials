@@ -1,12 +1,12 @@
 import { css } from 'emotion'
-import { isNil } from 'lodash'
+import { isNil, startsWith } from 'lodash'
 import React, { PureComponent } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router'
-import { colors, gradients, shadow, spacing } from '../ux/constants'
+import { colors, spacing } from '../ux/constants'
 import { SidePanel } from '../ux/SidePanel'
 import { Tree } from '../ux/Tree'
 import { TreeItem } from '../ux/TreeItem'
-import { routes, RouteDescriptor } from './routes'
+import { routes, RouteDescriptor, flatRoutes } from './routes'
 
 type NavigationPanelProps = RouteComponentProps
 
@@ -41,7 +41,7 @@ const scrollAreaStyle = css({
 
 export class _NavigationPanel extends PureComponent<NavigationPanelProps, NavigationPanelState> {
   state = {
-    treeState: {},
+    treeState: this.buildTreeState(),
   }
 
   private onRouteSelected = (route: string) => {
@@ -82,14 +82,21 @@ export class _NavigationPanel extends PureComponent<NavigationPanelProps, Naviga
     return (
       <SidePanel>
         <div className={headerStyle}>
-          <h1 className={titleStyle}>Balázs Édes</h1>
-          <h2 className={subtitleStyle}>Guitar and music theory</h2>
+          <h1 className={titleStyle}>Guitar</h1>
+          <h2 className={subtitleStyle}>Practice, theory, ear training</h2>
         </div>
         <div className={scrollAreaStyle}>
           <Tree>{this.renderTreeItems(routes, 0)}</Tree>
         </div>
       </SidePanel>
     )
+  }
+
+  private buildTreeState(): { [id: string]: boolean } {
+    const { location } = this.props
+    return flatRoutes
+      .filter((route) => startsWith(location.pathname, route.id))
+      .reduce((routes, { id }) => ({ ...routes, [id]: true }), {})
   }
 }
 
