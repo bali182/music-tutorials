@@ -45,14 +45,7 @@ export const createRandomChord = (chordType: ChordType, playNotes: boolean, scal
     .map((range) => Interval.fromSemitones(range))
   const root = sample(scale.notes)
   const notes = intervals.map((interval) => transpose(root, interval))
-  if (playNotes) {
-    return createSequence(synth, [
-      ...notes.map((note): AudioNote => ({ note, duration: '8n' })),
-      { note: notes, duration: '4n' },
-    ])
-  }
-  return createSequence(
-    synth,
-    notes.map((note): AudioNote => ({ note, duration: '8n' }))
-  )
+  const individuallyPlayedNotes = notes.map((note): AudioNote => ({ note, duration: '8n' }))
+  const chordNotes = [{ note: notes, duration: '4n' }]
+  return createSequence(synth, playNotes ? individuallyPlayedNotes.concat(chordNotes) : chordNotes)
 }

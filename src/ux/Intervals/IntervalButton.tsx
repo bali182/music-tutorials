@@ -31,9 +31,10 @@ const intervalButtonStyle = (active: boolean) =>
     boxShadow: shadow.small,
     cursor: active ? 'pointer' : 'not-allowed !important',
     ':hover': {
-      transform: active ? 'scale(1.05, 1.05)' : 'none',
+      transform: active ? 'scale(1.03, 1.03)' : 'none',
       boxShadow: shadow.default,
     },
+    zIndex: 2,
   })
 
 const intervalNameStyle = (interval: number, active: boolean) =>

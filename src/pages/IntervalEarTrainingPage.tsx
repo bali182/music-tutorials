@@ -25,7 +25,7 @@ type IntervalEarTrainingPageState = {
 }
 
 const intervalContainerStyle = css({
-  width: '60vw',
+  width: '100%',
   marginBottom: spacing.l,
 })
 

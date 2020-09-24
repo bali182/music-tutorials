@@ -16,7 +16,6 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
     id: 'intervals',
     label: 'Intervals',
     children: [
-      { id: 'introduction', label: 'Introduction' },
       {
         id: 'theory',
         label: 'Theory',
@@ -87,7 +86,6 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
         id: 'theory',
         label: 'Theory',
         children: [
-          { id: 'introduction', label: 'Introduction' },
           { id: 'triads', label: 'Triads (Major, minor, diminished, augmented)' },
           { id: 'sevenths', label: 'Extended 7th chords' },
           { id: 'ninths', label: 'Extended 9th chords' },

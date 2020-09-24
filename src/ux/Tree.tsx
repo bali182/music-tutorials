@@ -8,7 +8,7 @@ type TreeProps = {
 
 const treeStyle = css({
   label: 'tree',
-  padding: spacing.m,
+  padding: spacing.s,
   height: '100%',
   width: '100%',
   display: 'flex',

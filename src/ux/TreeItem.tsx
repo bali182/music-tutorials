@@ -54,11 +54,14 @@ const treeItemStyle = (level: number, isActive: boolean) =>
   })
 
 export class TreeItem extends PureComponent<TreeItemProps> {
-  private onArrowClick = () => {
-    const { onToggle, id, isOpen } = this.props
+  private onArrowClick = (e: React.MouseEvent) => {
+    const { onToggle, id, isOpen, isParent } = this.props
+    if (isParent) {
+      e.stopPropagation()
+    }
     onToggle(id, !isOpen)
   }
-  private onLabelClick = () => {
+  private onClick = () => {
     const { onSelect, id } = this.props
     onSelect(id)
   }
@@ -71,11 +74,7 @@ export class TreeItem extends PureComponent<TreeItemProps> {
 
   private renderLabel() {
     const { label, isActive } = this.props
-    return (
-      <div className={labelStyle(isActive)} onClick={this.onLabelClick}>
-        {label}
-      </div>
-    )
+    return <div className={labelStyle(isActive)}>{label}</div>
   }
 
   private renderChildren() {
@@ -87,7 +86,7 @@ export class TreeItem extends PureComponent<TreeItemProps> {
     const { level, isActive } = this.props
     return (
       <Fragment>
-        <div className={treeItemStyle(level, isActive)}>
+        <div className={treeItemStyle(level, isActive)} onClick={this.onClick}>
           {this.renderIcon()}
           {this.renderLabel()}
         </div>

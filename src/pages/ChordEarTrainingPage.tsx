@@ -5,7 +5,7 @@ import { sample } from 'lodash'
 import React, { PureComponent } from 'react'
 import { PolySynth, Sequence, start, Transport } from 'tone'
 import { createDefaultSynth } from '../audio/defaultSynth'
-import { createRandomChord, createRandomInterval, playSequence } from '../audio/sequence'
+import { createRandomChord, playSequence } from '../audio/sequence'
 import { Button, ButtonKind } from '../ux/Button'
 import { Card } from '../ux/Card'
 import { CardContent, ContentDirection } from '../ux/CardContent'
@@ -26,8 +26,8 @@ type ChordEarTrainingPageState = {
 }
 
 const intervalContainerStyle = css({
-  width: '60vw',
   marginBottom: spacing.l,
+  width: '100%',
 })
 
 const tutorialStyle = css({
@@ -135,7 +135,7 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
     return {
       chordType,
       guesses: [],
-      sequence: createRandomChord(chordType, true)(this.synth),
+      sequence: createRandomChord(chordType, false)(this.synth),
     }
   }
 }

@@ -1,7 +1,7 @@
 import { css } from 'emotion'
 import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { colors } from '../ux/constants'
+import { colors, spacing } from '../ux/constants'
 import { flatRoutes } from './routes'
 
 const contentStyle = css({
@@ -9,11 +9,8 @@ const contentStyle = css({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
-  alignContent: 'center',
-  justifyContent: 'center',
-  justifyItems: 'center',
   backgroundColor: colors.lightGreen,
+  padding: spacing.l,
 })
 
 class FallbackRoute extends PureComponent {
