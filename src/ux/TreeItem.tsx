@@ -29,6 +29,7 @@ const labelStyle = (isActive: boolean) =>
   css({
     display: 'inline-block',
     label: 'treeItem-label',
+    fontWeight: 'bold',
     color: isActive ? colors.white : 'inherit',
   })
 

@@ -13,9 +13,12 @@ import { CardHeader } from '../ux/CardHeader'
 import { CardTitle } from '../ux/CardTitle'
 import { colors, spacing } from '../ux/constants'
 import { Intervals } from '../ux/Intervals/Intervals'
+import { TextBlock } from '../ux/TextBlock'
+import { UnorderedList } from '../ux/UnorderedList'
 
 type IntervalEarTrainingPageProps = {
   intervals: number[]
+  title: string
 }
 
 type IntervalEarTrainingPageState = {
@@ -88,19 +91,21 @@ export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPa
 
   render() {
     const { guesses, interval } = this.state
-    const { intervals } = this.props
+    const { intervals, title } = this.props
     const correctGuess = guesses.indexOf(interval) >= 0
     return (
       <Card>
         <CardHeader color={colors.blue}>
-          <CardTitle>Intervals</CardTitle>
+          <CardTitle>{title}</CardTitle>
         </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>
-          <ul className={tutorialStyle}>
-            <li>Listen to the interval, and pick the correct one from below!</li>
-            <li>Try playing it on your instrument!</li>
-            <li>Try humming/singing along!</li>
-          </ul>
+          <TextBlock>
+            <UnorderedList>
+              <li>Listen to the interval, and pick the correct one from below!</li>
+              <li>Try playing it on your instrument!</li>
+              <li>Try humming/singing along!</li>
+            </UnorderedList>
+          </TextBlock>
         </CardContent>
         <CardContent direction={ContentDirection.Vertical}>
           <div className={intervalContainerStyle}>

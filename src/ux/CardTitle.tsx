@@ -5,7 +5,7 @@ import classNames from 'classnames'
 const cardTitleStyle = css({
   label: 'card-title',
   display: 'block',
-  fontSize: '26px',
+  fontSize: '1.5em',
   fontWeight: 'bold',
   color: '#fff',
   opacity: 1,

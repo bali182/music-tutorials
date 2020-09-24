@@ -14,9 +14,12 @@ import { CardTitle } from '../ux/CardTitle'
 import { ChordsEarTraining } from '../ux/ChordEarTraining/ChordsEarTraining'
 import { ChordType } from '../ux/ChordEarTraining/ChordType'
 import { colors, spacing } from '../ux/constants'
+import { TextBlock } from '../ux/TextBlock'
+import { UnorderedList } from '../ux/UnorderedList'
 
 type ChordEarTrainingPageProps = {
   chordTypes: ChordType[]
+  title: string
 }
 
 type ChordEarTrainingPageState = {
@@ -89,19 +92,21 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
 
   render() {
     const { guesses, chordType } = this.state
-    const { chordTypes } = this.props
+    const { chordTypes, title } = this.props
     const correctGuess = guesses.indexOf(chordType) >= 0
     return (
       <Card>
         <CardHeader color={colors.blue}>
-          <CardTitle>Chords</CardTitle>
+          <CardTitle>{title}</CardTitle>
         </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>
-          <ul className={tutorialStyle}>
-            <li>Listen to the chord, and pick the correct one from below!</li>
-            <li>Try playing it on your instrument!</li>
-            <li>Try humming/singing along!</li>
-          </ul>
+          <TextBlock>
+            <UnorderedList>
+              <li>Listen to the chord, and pick the correct one from below!</li>
+              <li>Try playing it on your instrument!</li>
+              <li>Try humming/singing along!</li>
+            </UnorderedList>
+          </TextBlock>
         </CardContent>
         <CardContent direction={ContentDirection.Vertical}>
           <div className={intervalContainerStyle}>

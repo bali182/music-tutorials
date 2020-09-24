@@ -9,12 +9,6 @@ const cardSectionStyle = css({
   flexDirection: 'column',
 })
 
-const cardSectionTitleStyle = css({
-  fontSize: '40px',
-  fontWeight: 'bold',
-  margin: '30px 10px',
-})
-
 type CardContainerProps = {
   children: ReactNode
   itemsPerRow: number

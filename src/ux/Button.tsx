@@ -21,7 +21,7 @@ const buttonStyle = (kind: ButtonKind) =>
     label: 'button',
     background: kind === ButtonKind.Primary ? colors.blue : colors.gray,
     fontWeight: 'bold',
-    fontSize: '16px',
+    fontSize: '1em',
     borderRadius: '28px',
     border: 'none',
     cursor: 'pointer',

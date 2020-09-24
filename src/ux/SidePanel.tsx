@@ -20,6 +20,8 @@ const sidePanelStyle = css({
   height: '100vh !important',
   display: 'flex',
   flexDirection: 'column',
+  flexGrow: 0,
+  flexShrink: 0,
   zIndex: 1,
 })
 

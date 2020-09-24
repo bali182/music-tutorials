@@ -45,6 +45,7 @@ const intervalContainerStyle = css({
 
 const intervalStyle = (interval: number) =>
   css({
+    label: 'chordButton-interval',
     flexGrow: interval,
     flexShrink: 1,
     flexBasis: '1px',
@@ -56,6 +57,7 @@ const intervalStyle = (interval: number) =>
     paddingBottom: spacing.xs,
     color: colors.white,
     fontWeight: 'bold',
+    marginLeft: spacing.xxs,
   })
 
 const chordLabelStyle = (active: boolean) =>

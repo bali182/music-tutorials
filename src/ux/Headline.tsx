@@ -3,9 +3,9 @@ import { css } from 'emotion'
 
 const headlineStyle = (alignment: string) =>
   css({
-    fontSize: '40px',
+    fontSize: '2em',
     fontWeight: 'bold',
-    margin: '30px 10px',
+    width: '100%',
     textAlign: alignment as any,
   })
 
