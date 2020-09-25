@@ -86,7 +86,7 @@ export class ChordButton extends PureComponent<ChordButtonProps> {
     const buttonStyle = cx(chordButtonStyle(isEnabled), isSuccess ? successStyle : null, isError ? errorStyle : null)
     return (
       <div className={buttonStyle} onClick={isEnabled ? onClick : null}>
-        <div className={chordLabelStyle(isEnabled)}>{getChordName(chordType)} chord</div>
+        <div className={chordLabelStyle(isEnabled)}>{getChordName(chordType)}</div>
         <div className={intervalContainerStyle}>
           {intervals.map((interval, idx) => (
             <div key={idx} className={intervalStyle(interval)}>

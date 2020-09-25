@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode, Children } from 'react'
+import React, { PureComponent, ReactNode } from 'react'
 import { css } from 'emotion'
 import { CardContainer } from './CardContainer'
 import { Headline } from './Headline'

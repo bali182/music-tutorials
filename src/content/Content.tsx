@@ -9,8 +9,6 @@ const contentStyle = css({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: colors.lightGreen,
-  padding: spacing.l,
 })
 
 class FallbackRoute extends PureComponent {

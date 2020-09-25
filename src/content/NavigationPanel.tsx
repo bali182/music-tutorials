@@ -16,18 +16,19 @@ type NavigationPanelState = {
 
 const headerStyle = css({
   padding: spacing.s,
-  backgroundColor: colors.blue,
+  borderBottomColor: colors.lightGray,
+  borderBottomStyle: 'solid',
+  borderBottomWidth: '1px',
+  height: '80px',
 })
 
 const titleStyle = css({
-  color: colors.white,
   fontWeight: 'bold',
   fontSize: '2em',
   marginBottom: spacing.xs,
 })
 
 const subtitleStyle = css({
-  color: colors.white,
   fontWeight: 'normal',
   opacity: 0.9,
 })

@@ -4,6 +4,7 @@ import { IntervalEarTrainingPage } from '../pages/IntervalEarTrainingPage'
 import { IntervalsInOctavePage } from '../pages/IntervalsInOctavePage'
 import { IntervalsIntroPage } from '../pages/IntervalsIntroPage'
 import { InversionsOfIntervalsPage } from '../pages/InversionsOfIntervalsPage'
+import { TriadsPage } from '../pages/TriadsPage'
 import { ChordType } from '../ux/ChordEarTraining/ChordType'
 import { allWithQualifiedIds, flattenRoutes } from './routeUtils'
 
@@ -15,6 +16,11 @@ export type RouteDescriptor = {
 }
 
 export const routes: RouteDescriptor[] = allWithQualifiedIds([
+  {
+    id: 'scales',
+    label: 'Scales',
+    children: [{ id: 'pentatonic-scale', label: 'Pentatonic scale' }],
+  },
   {
     id: 'intervals',
     label: 'Intervals',
@@ -104,7 +110,7 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
         id: 'theory',
         label: 'Theory',
         children: [
-          { id: 'triads', label: 'Triads (Major, minor, diminished, augmented)' },
+          { id: 'triads', label: 'Triads (Major, minor, diminished, augmented)', component: TriadsPage },
           { id: 'sevenths', label: 'Extended 7th chords' },
           { id: 'ninths', label: 'Extended 9th chords' },
           { id: 'suspended', label: 'Suspended (sus2, sus4 and add9) chords' },

@@ -13,7 +13,7 @@ type SidePanelState = {
 const sidePanelStyle = css({
   label: 'sidePanel',
   background: colors.white,
-  boxShadow: shadow.default,
+  borderRightWidth: '1px',
   borderRightColor: colors.lightGray,
   borderRightStyle: 'solid',
   width: '300px',
@@ -22,7 +22,6 @@ const sidePanelStyle = css({
   flexDirection: 'column',
   flexGrow: 0,
   flexShrink: 0,
-  zIndex: 1,
 })
 
 export class SidePanel extends PureComponent<SidePanelProps, SidePanelState> {

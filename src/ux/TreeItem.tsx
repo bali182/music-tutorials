@@ -16,7 +16,7 @@ type TreeItemProps = {
   onSelect: (id: string) => void
 }
 
-const iconStyle = (isActive: boolean) =>
+const iconStyle = ({ isActive }: TreeItemProps) =>
   css({
     label: 'treeItem-icon',
     marginRight: spacing.xs,
@@ -25,15 +25,18 @@ const iconStyle = (isActive: boolean) =>
     },
   })
 
-const labelStyle = (isActive: boolean) =>
+const labelStyle = ({ isActive, isParent }: TreeItemProps) =>
   css({
     display: 'inline-block',
     label: 'treeItem-label',
-    fontWeight: 'bold',
+    fontWeight: isParent ? 'bold' : 'normal',
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: '1px',
     color: isActive ? colors.white : 'inherit',
   })
 
-const treeItemStyle = (level: number, isActive: boolean) =>
+const treeItemStyle = ({ level, isActive }: TreeItemProps) =>
   css({
     label: 'treeItem',
     padding: spacing.s,
@@ -68,14 +71,17 @@ export class TreeItem extends PureComponent<TreeItemProps> {
   }
 
   private renderIcon() {
-    const { isParent, isOpen, isActive } = this.props
-    const icon = !isParent ? faGuitar : isOpen ? faChevronDown : faChevronRight
-    return <FontAwesomeIcon className={iconStyle(isActive)} icon={icon} onClick={this.onArrowClick} />
+    const { isParent, isOpen } = this.props
+    if (!isParent) {
+      return null
+    }
+    const icon = isOpen ? faChevronDown : faChevronRight
+    return <FontAwesomeIcon className={iconStyle(this.props)} icon={icon} onClick={this.onArrowClick} />
   }
 
   private renderLabel() {
-    const { label, isActive } = this.props
-    return <div className={labelStyle(isActive)}>{label}</div>
+    const { label } = this.props
+    return <div className={labelStyle(this.props)}>{label}</div>
   }
 
   private renderChildren() {
@@ -84,12 +90,11 @@ export class TreeItem extends PureComponent<TreeItemProps> {
   }
 
   render() {
-    const { level, isActive } = this.props
     return (
       <Fragment>
-        <div className={treeItemStyle(level, isActive)} onClick={this.onClick}>
-          {this.renderIcon()}
+        <div className={treeItemStyle(this.props)} onClick={this.onClick}>
           {this.renderLabel()}
+          {this.renderIcon()}
         </div>
         {this.renderChildren()}
       </Fragment>

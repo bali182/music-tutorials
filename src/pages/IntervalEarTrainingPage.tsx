@@ -95,7 +95,7 @@ export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPa
     const correctGuess = guesses.indexOf(interval) >= 0
     return (
       <Card>
-        <CardHeader color={colors.blue}>
+        <CardHeader>
           <CardTitle>{title}</CardTitle>
         </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>

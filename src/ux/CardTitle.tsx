@@ -7,7 +7,6 @@ const cardTitleStyle = css({
   display: 'block',
   fontSize: '1.5em',
   fontWeight: 'bold',
-  color: '#fff',
   opacity: 1,
   margin: '14px 14px 8px 14px',
 })

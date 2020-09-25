@@ -1,5 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react'
 import { css } from 'emotion'
+import { spacing } from './constants'
 
 export enum ContentDirection {
   Horizontal = 'Horizontal',
@@ -9,7 +10,7 @@ export enum ContentDirection {
 const cardContentStyle = (direction: ContentDirection) =>
   css({
     label: 'card-content',
-    margin: '18px 14px 0px 14px',
+    margin: spacing.l,
     display: 'flex',
     flexDirection: direction === ContentDirection.Vertical ? 'column' : 'row',
     alignItems: 'center',
