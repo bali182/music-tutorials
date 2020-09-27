@@ -292,6 +292,10 @@ export class FretboardModelUtil {
     return isNil(stringIndex) ? null : model.strings[stringIndex]
   }
 
+  getStringByIndex(index: number): StringModel {
+    return this.model.strings[index]
+  }
+
   getStringIndex(stringId: string): number {
     const stringIndex = this.stringMap[stringId]
     return isNil(stringIndex) ? null : stringIndex

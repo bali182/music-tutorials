@@ -18,7 +18,6 @@ import { UnorderedList } from '../ux/UnorderedList'
 
 type IntervalEarTrainingPageProps = {
   intervals: number[]
-  title: string
 }
 
 type IntervalEarTrainingPageState = {
@@ -91,13 +90,10 @@ export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPa
 
   render() {
     const { guesses, interval } = this.state
-    const { intervals, title } = this.props
+    const { intervals } = this.props
     const correctGuess = guesses.indexOf(interval) >= 0
     return (
       <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>
           <TextBlock>
             <UnorderedList>

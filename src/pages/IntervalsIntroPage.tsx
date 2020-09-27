@@ -9,9 +9,6 @@ export class IntervalsIntroPage extends PureComponent {
   render() {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle>Intervals</CardTitle>
-        </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>
           <TextBlock>Intervals reffer to the difference in pitch between two musical notes.</TextBlock>
         </CardContent>

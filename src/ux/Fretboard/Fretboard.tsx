@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, ReactNode } from 'react'
 import { FretboardModel, FretboardTheme, SelectionModel } from './FretboardModel'
 import { FretboardModelUtil } from './FretboadModelUtil'
 import { Nut } from './Nut'
@@ -31,6 +31,8 @@ export type FretboardProps = {
   onFretSelected?: FretSelectionHandler
   onStringSelected?: StringSelectionHandler
   onFretboardSelected?: FretboardSelectionHandler
+
+  children: ReactNode
 }
 
 export type FretboardState = {
@@ -76,6 +78,7 @@ export class Fretboard extends PureComponent<FretboardProps, FretboardState> {
       onStringSelected,
       onFretboardSelected,
       selection,
+      children,
     } = this.props
 
     const { hoverSelection } = this.state
@@ -103,6 +106,7 @@ export class Fretboard extends PureComponent<FretboardProps, FretboardState> {
           <Frets />
           <Nut />
           <GuitarStrings />
+          {children}
           <Markers />
           <FretLabel />
         </svg>

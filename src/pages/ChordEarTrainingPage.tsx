@@ -9,17 +9,14 @@ import { createRandomChord, playSequence } from '../audio/sequence'
 import { Button, ButtonKind } from '../ux/Button'
 import { Card } from '../ux/Card'
 import { CardContent, ContentDirection } from '../ux/CardContent'
-import { CardHeader } from '../ux/CardHeader'
-import { CardTitle } from '../ux/CardTitle'
 import { ChordsEarTraining } from '../ux/ChordEarTraining/ChordsEarTraining'
 import { ChordType } from '../ux/ChordEarTraining/ChordType'
-import { colors, spacing } from '../ux/constants'
+import { spacing } from '../ux/constants'
 import { TextBlock } from '../ux/TextBlock'
 import { UnorderedList } from '../ux/UnorderedList'
 
 type ChordEarTrainingPageProps = {
   chordTypes: ChordType[]
-  title: string
 }
 
 type ChordEarTrainingPageState = {
@@ -92,13 +89,10 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
 
   render() {
     const { guesses, chordType } = this.state
-    const { chordTypes, title } = this.props
+    const { chordTypes } = this.props
     const correctGuess = guesses.indexOf(chordType) >= 0
     return (
       <Card>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>
           <TextBlock>
             <UnorderedList>

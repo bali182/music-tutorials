@@ -1,3 +1,4 @@
+import { isNil } from 'lodash'
 import React, { PureComponent } from 'react'
 import { PolySynth, Sequence, start, Transport } from 'tone'
 import { createDefaultSynth } from '../audio/defaultSynth'
@@ -13,7 +14,7 @@ export class InversionsOfIntervalsPage extends PureComponent {
   private sequence: Sequence = null
 
   private playInterval = (interval: number, isInverse: boolean) => {
-    if (this.sequence !== null) {
+    if (!isNil(this.sequence)) {
       this.sequence.stop()
       this.sequence.dispose()
     }
@@ -29,12 +30,16 @@ export class InversionsOfIntervalsPage extends PureComponent {
     Transport.bpm.value = 30
   }
 
+  componentWillUnmount() {
+    if (!isNil(this.sequence)) {
+      this.sequence.stop()
+      this.sequence.dispose()
+    }
+  }
+
   render() {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle>Inversions of intervals</CardTitle>
-        </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>
           <IntervalsWithInverse
             intervals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}

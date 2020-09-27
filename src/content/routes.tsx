@@ -4,6 +4,7 @@ import { IntervalEarTrainingPage } from '../pages/IntervalEarTrainingPage'
 import { IntervalsInOctavePage } from '../pages/IntervalsInOctavePage'
 import { IntervalsIntroPage } from '../pages/IntervalsIntroPage'
 import { InversionsOfIntervalsPage } from '../pages/InversionsOfIntervalsPage'
+import { PentatonicPage } from '../pages/PentatonicPage'
 import { TriadsPage } from '../pages/TriadsPage'
 import { ChordType } from '../ux/ChordEarTraining/ChordType'
 import { allWithQualifiedIds, flattenRoutes } from './routeUtils'
@@ -19,7 +20,7 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
   {
     id: 'scales',
     label: 'Scales',
-    children: [{ id: 'pentatonic-scale', label: 'Pentatonic scale' }],
+    children: [{ id: 'pentatonic-scale', label: 'Pentatonic scale', component: PentatonicPage }],
   },
   {
     id: 'intervals',
@@ -42,61 +43,47 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
           {
             id: 'major-and-minor-seconds',
             label: 'Major and minor 2nd',
-            component: () => <IntervalEarTrainingPage intervals={[1, 2]} title="Major and minor 2nd intervals" />,
+            component: () => <IntervalEarTrainingPage intervals={[1, 2]} />,
           },
           {
             id: 'major-and-minor-thirds',
             label: 'Major and minor 3rd',
-            component: () => <IntervalEarTrainingPage intervals={[3, 4]} title="Major and minor 2nd intervals" />,
+            component: () => <IntervalEarTrainingPage intervals={[3, 4]} />,
           },
           {
             id: 'seconds-and-thirds',
             label: '2nd and 3rd',
-            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4]} title="2nd and 3rd intervals" />,
+            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4]} />,
           },
           {
             id: 'perfect-fourth-and-fifth',
             label: 'Perfect 4th, tritone and perfect 5th',
-            component: () => (
-              <IntervalEarTrainingPage intervals={[5, 6, 7]} title="Perfect 4th, tritone and perfect 5th intervals" />
-            ),
+            component: () => <IntervalEarTrainingPage intervals={[5, 6, 7]} />,
           },
           {
             id: 'seconds-thirds-fourths-fifths',
             label: '2nd, 3rd, 4th, and 5th',
-            component: () => (
-              <IntervalEarTrainingPage intervals={[1, 2, 3, 4, 5, 6, 7]} title="2nd, 3rd, 4th, and 5th intervals" />
-            ),
+            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4, 5, 6, 7]} />,
           },
           {
             id: 'major-and-minor-sixths',
             label: 'Major and minor 6th',
-            component: () => <IntervalEarTrainingPage intervals={[8, 9]} title="Major and minor 6th intervals" />,
+            component: () => <IntervalEarTrainingPage intervals={[8, 9]} />,
           },
           {
             id: 'seconds-thirds-fourths-fifths-sixths',
             label: '2nd, 3rd, 4th, 5th and 6th',
-            component: () => (
-              <IntervalEarTrainingPage
-                intervals={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-                title="2nd, 3rd, 4th, 5th and 6th intervals"
-              />
-            ),
+            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4, 5, 6, 7, 8, 9]} />,
           },
           {
             id: 'major-and-minor-sevenths',
             label: 'Major and minor 7th',
-            component: () => <IntervalEarTrainingPage intervals={[10, 11]} title="Major and minor 7th intervals" />,
+            component: () => <IntervalEarTrainingPage intervals={[10, 11]} />,
           },
           {
             id: 'intervals-in-octave',
             label: 'All intervals in an octave',
-            component: () => (
-              <IntervalEarTrainingPage
-                intervals={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
-                title="All intervals in an octave"
-              />
-            ),
+            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} />,
           },
         ],
       },
@@ -125,7 +112,6 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
             label: 'Triads (Major, minor, diminished, augmented)',
             component: () => (
               <ChordEarTrainingPage
-                title="Triads (Major, minor, diminished, augmented)"
                 chordTypes={[ChordType.DiminishedTriad, ChordType.MajorTriad, ChordType.MinorTriad]}
               />
             ),
@@ -133,32 +119,17 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
           {
             id: 'sevenths',
             label: 'Extended 7th chords',
-            component: () => (
-              <ChordEarTrainingPage
-                title="Extended 7th chords"
-                chordTypes={[ChordType.MajorSeventh, ChordType.MinorSeventh]}
-              />
-            ),
+            component: () => <ChordEarTrainingPage chordTypes={[ChordType.MajorSeventh, ChordType.MinorSeventh]} />,
           },
           {
             id: 'ninths',
             label: 'Extended 9th chords',
-            component: () => (
-              <ChordEarTrainingPage
-                title="Extended 9th chords"
-                chordTypes={[ChordType.MajorNinth, ChordType.MinorNinth]}
-              />
-            ),
+            component: () => <ChordEarTrainingPage chordTypes={[ChordType.MajorNinth, ChordType.MinorNinth]} />,
           },
           {
             id: 'suspended',
             label: 'Suspended (sus2, sus4) chords',
-            component: () => (
-              <ChordEarTrainingPage
-                title="Suspended (sus2, sus4) chords"
-                chordTypes={[ChordType.Suspended2, ChordType.Suspended4]}
-              />
-            ),
+            component: () => <ChordEarTrainingPage chordTypes={[ChordType.Suspended2, ChordType.Suspended4]} />,
           },
         ],
       },

@@ -17,9 +17,6 @@ export class TriadsPage extends PureComponent {
   render() {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle>Triads</CardTitle>
-        </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>
           <TextBlock></TextBlock>
           <div className={leftAligner}>

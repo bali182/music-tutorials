@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react'
-import { range } from 'lodash'
+import { isNil, range } from 'lodash'
 import { PolySynth, Sequence, start, Transport } from 'tone'
 import { Card } from '../ux/Card'
 import { CardContent, ContentDirection } from '../ux/CardContent'
-import { CardHeader } from '../ux/CardHeader'
-import { CardTitle } from '../ux/CardTitle'
 import { Intervals } from '../ux/Intervals/Intervals'
 import { createDefaultSynth } from '../audio/defaultSynth'
 import { createInterval, playSequence } from '../audio/sequence'
@@ -14,7 +12,7 @@ export class IntervalsInOctavePage extends PureComponent {
   private sequence: Sequence = null
 
   private playInterval = (interval: number) => {
-    if (this.sequence !== null) {
+    if (!isNil(this.sequence)) {
       this.sequence.stop()
       this.sequence.dispose()
     }
@@ -28,12 +26,16 @@ export class IntervalsInOctavePage extends PureComponent {
     Transport.bpm.value = 30
   }
 
+  componentWillUnmount() {
+    if (!isNil(this.sequence)) {
+      this.sequence.stop()
+      this.sequence.dispose()
+    }
+  }
+
   render() {
     return (
       <Card>
-        <CardHeader>
-          <CardTitle>Intervals in an octave</CardTitle>
-        </CardHeader>
         <CardContent direction={ContentDirection.Vertical}>
           <Intervals
             intervals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}

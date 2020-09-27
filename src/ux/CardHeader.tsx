@@ -8,6 +8,7 @@ const cardHeaderStyle = css({
   color: '#fff',
   height: '80px',
   display: 'flex',
+  flexShrink: 0,
   flexDirection: 'column',
   justifyContent: 'center',
   borderBottomColor: colors.lightGray,
