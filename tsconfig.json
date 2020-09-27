@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false,
     "esModuleInterop": true,
     "jsx": "react",
     "target": "es6"

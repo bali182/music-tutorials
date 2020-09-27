@@ -2,8 +2,8 @@ import React, { PureComponent, ReactNode } from 'react'
 import { css } from 'emotion'
 import classNames from 'classnames'
 
-const cardTitleStyle = css({
-  label: 'card-title',
+const titleStyle = css({
+  label: 'title',
   display: 'block',
   fontSize: '1.5em',
   fontWeight: 'bold',
@@ -11,14 +11,14 @@ const cardTitleStyle = css({
   margin: '14px 14px 8px 14px',
 })
 
-type CardTitleProps = {
+type TitleProps = {
   children: ReactNode
   className?: string
 }
 
-export class CardTitle extends PureComponent<CardTitleProps> {
+export class Title extends PureComponent<TitleProps> {
   render() {
     const { children, className } = this.props
-    return <div className={classNames(cardTitleStyle, className)}>{children}</div>
+    return <div className={classNames(titleStyle, className)}>{children}</div>
   }
 }

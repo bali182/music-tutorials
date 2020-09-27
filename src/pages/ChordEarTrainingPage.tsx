@@ -2,13 +2,12 @@ import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from 'emotion'
 import { sample } from 'lodash'
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { PolySynth, Sequence, start, Transport } from 'tone'
 import { createDefaultSynth } from '../audio/defaultSynth'
 import { createRandomChord, playSequence } from '../audio/sequence'
 import { Button, ButtonKind } from '../ux/Button'
-import { Card } from '../ux/Card'
-import { CardContent, ContentDirection } from '../ux/CardContent'
+import { Content, ContentDirection } from '../ux/Content'
 import { ChordsEarTraining } from '../ux/ChordEarTraining/ChordsEarTraining'
 import { ChordType } from '../ux/ChordEarTraining/ChordType'
 import { spacing } from '../ux/constants'
@@ -28,13 +27,6 @@ type ChordEarTrainingPageState = {
 const intervalContainerStyle = css({
   marginBottom: spacing.l,
   width: '100%',
-})
-
-const tutorialStyle = css({
-  listStyleType: 'disc',
-  width: '100%',
-  padding: spacing.s,
-  paddingLeft: spacing.l,
 })
 
 const buttonRowStyle = css({
@@ -92,8 +84,8 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
     const { chordTypes } = this.props
     const correctGuess = guesses.indexOf(chordType) >= 0
     return (
-      <Card>
-        <CardContent direction={ContentDirection.Vertical}>
+      <Fragment>
+        <Content direction={ContentDirection.Vertical}>
           <TextBlock>
             <UnorderedList>
               <li>Listen to the chord, and pick the correct one from below!</li>
@@ -101,8 +93,8 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
               <li>Try humming/singing along!</li>
             </UnorderedList>
           </TextBlock>
-        </CardContent>
-        <CardContent direction={ContentDirection.Vertical}>
+        </Content>
+        <Content direction={ContentDirection.Vertical}>
           <div className={intervalContainerStyle}>
             <ChordsEarTraining
               correctChordType={chordType}
@@ -124,8 +116,8 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
               <span className={playButtonLabelStyle}>Next chord</span>
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </Content>
+      </Fragment>
     )
   }
 

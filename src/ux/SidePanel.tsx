@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react'
 import { css } from 'emotion'
-import { colors, spacing, shadow, gradients } from './constants'
+import { colors } from './constants'
 
 type SidePanelProps = {
   children: ReactNode

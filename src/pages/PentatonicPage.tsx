@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Card } from '../ux/Card'
-import { CardContent, ContentDirection } from '../ux/CardContent'
+import { Content, ContentDirection } from '../ux/Content'
 import { sixGuitarStrings } from '../ux/Fretboard/defaultStrings'
 import { defaultTheme } from '../ux/Fretboard/defaultTheme'
 import { Fretboard } from '../ux/Fretboard/Fretboard'
@@ -20,13 +19,11 @@ export class PentatonicPage extends PureComponent {
       type: 'fretboard',
     }
     return (
-      <Card>
-        <CardContent direction={ContentDirection.Vertical}>
-          <Fretboard pure={true} model={model} theme={defaultTheme}>
-            <PentatonicShape />
-          </Fretboard>
-        </CardContent>
-      </Card>
+      <Content direction={ContentDirection.Vertical}>
+        <Fretboard pure={true} model={model} theme={defaultTheme}>
+          <PentatonicShape />
+        </Fretboard>
+      </Content>
     )
   }
 }

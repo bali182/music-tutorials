@@ -1,12 +1,12 @@
 import { css } from 'emotion'
 import React, { PureComponent } from 'react'
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom'
-import { CardHeader } from '../ux/CardHeader'
-import { CardTitle } from '../ux/CardTitle'
+import { Header } from '../ux/Header'
+import { Title } from '../ux/Title'
 import { flatRoutes } from './routes'
 
-const contentStyle = css({
-  label: 'content',
+const pageContentStyle = css({
+  label: 'pageContent',
   width: '100%',
   height: '100vh',
   overflow: 'auto',
@@ -20,7 +20,7 @@ class FallbackRoute extends PureComponent {
   }
 }
 
-export class _Content extends PureComponent<RouteComponentProps> {
+export class _PageContent extends PureComponent<RouteComponentProps> {
   private renderRoutes() {
     return flatRoutes.map((route) => (
       <Route key={route.id} path={route.id} exact={true} component={route.component || FallbackRoute} />
@@ -32,10 +32,10 @@ export class _Content extends PureComponent<RouteComponentProps> {
   }
   render() {
     return (
-      <div className={contentStyle}>
-        <CardHeader>
-          <CardTitle>{this.getPageTitle()}</CardTitle>
-        </CardHeader>
+      <div className={pageContentStyle}>
+        <Header>
+          <Title>{this.getPageTitle()}</Title>
+        </Header>
         <Switch>
           {this.renderRoutes()}
           <Route path="/" exact={true} component={FallbackRoute} />
@@ -45,4 +45,4 @@ export class _Content extends PureComponent<RouteComponentProps> {
   }
 }
 
-export const Content = withRouter(_Content)
+export const PageContent = withRouter(_PageContent)

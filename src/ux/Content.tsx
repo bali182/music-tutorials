@@ -7,9 +7,9 @@ export enum ContentDirection {
   Vertical = 'Vertical',
 }
 
-const cardContentStyle = (direction: ContentDirection) =>
+const contentStyle = (direction: ContentDirection) =>
   css({
-    label: 'card-content',
+    label: 'content',
     margin: spacing.l,
     display: 'flex',
     flexDirection: direction === ContentDirection.Vertical ? 'column' : 'row',
@@ -23,14 +23,14 @@ const cardContentStyle = (direction: ContentDirection) =>
     },
   })
 
-type CardContentProps = {
+type ContentProps = {
   children: ReactNode
   direction: ContentDirection
 }
 
-export class CardContent extends PureComponent<CardContentProps> {
+export class Content extends PureComponent<ContentProps> {
   render() {
     const { children, direction } = this.props
-    return <div className={cardContentStyle(direction)}>{children}</div>
+    return <div className={contentStyle(direction)}>{children}</div>
   }
 }

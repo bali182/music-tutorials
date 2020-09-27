@@ -2,8 +2,8 @@ import React, { PureComponent, ReactNode } from 'react'
 import { css } from 'emotion'
 import { colors } from './constants'
 
-const cardHeaderStyle = css({
-  label: 'card-header',
+const headerStyle = css({
+  label: 'header',
   width: '100%',
   color: '#fff',
   height: '80px',
@@ -16,13 +16,13 @@ const cardHeaderStyle = css({
   borderBottomWidth: '1px',
 })
 
-type CardHeaderProps = {
+type HeaderProps = {
   children: ReactNode
 }
 
-export class CardHeader extends PureComponent<CardHeaderProps> {
+export class Header extends PureComponent<HeaderProps> {
   render() {
     const { children } = this.props
-    return <div className={cardHeaderStyle}>{children}</div>
+    return <div className={headerStyle}>{children}</div>
   }
 }

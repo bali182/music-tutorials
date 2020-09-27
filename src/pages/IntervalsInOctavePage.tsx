@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
-import { isNil, range } from 'lodash'
+import { isNil } from 'lodash'
 import { PolySynth, Sequence, start, Transport } from 'tone'
-import { Card } from '../ux/Card'
-import { CardContent, ContentDirection } from '../ux/CardContent'
+import { Content, ContentDirection } from '../ux/Content'
 import { Intervals } from '../ux/Intervals/Intervals'
 import { createDefaultSynth } from '../audio/defaultSynth'
 import { createInterval, playSequence } from '../audio/sequence'
@@ -35,16 +34,14 @@ export class IntervalsInOctavePage extends PureComponent {
 
   render() {
     return (
-      <Card>
-        <CardContent direction={ContentDirection.Vertical}>
-          <Intervals
-            intervals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
-            onGuess={this.playInterval}
-            correctInterval={null}
-            guesses={[]}
-          />
-        </CardContent>
-      </Card>
+      <Content direction={ContentDirection.Vertical}>
+        <Intervals
+          intervals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+          onGuess={this.playInterval}
+          correctInterval={null}
+          guesses={[]}
+        />
+      </Content>
     )
   }
 }

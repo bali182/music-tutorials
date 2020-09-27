@@ -1,8 +1,8 @@
 import React, { Fragment, PureComponent, ReactNode } from 'react'
-import { css, Interpolation } from 'emotion'
+import { css } from 'emotion'
 import { colors, spacing, transition } from './constants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronRight, faGuitar } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 type TreeItemProps = {
   id: string

@@ -2,16 +2,13 @@ import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from 'emotion'
 import { sample } from 'lodash'
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { PolySynth, Sequence, start, Transport } from 'tone'
 import { createDefaultSynth } from '../audio/defaultSynth'
 import { createRandomInterval, playSequence } from '../audio/sequence'
 import { Button, ButtonKind } from '../ux/Button'
-import { Card } from '../ux/Card'
-import { CardContent, ContentDirection } from '../ux/CardContent'
-import { CardHeader } from '../ux/CardHeader'
-import { CardTitle } from '../ux/CardTitle'
-import { colors, spacing } from '../ux/constants'
+import { Content, ContentDirection } from '../ux/Content'
+import { spacing } from '../ux/constants'
 import { Intervals } from '../ux/Intervals/Intervals'
 import { TextBlock } from '../ux/TextBlock'
 import { UnorderedList } from '../ux/UnorderedList'
@@ -29,13 +26,6 @@ type IntervalEarTrainingPageState = {
 const intervalContainerStyle = css({
   width: '100%',
   marginBottom: spacing.l,
-})
-
-const tutorialStyle = css({
-  listStyleType: 'disc',
-  width: '100%',
-  padding: spacing.s,
-  paddingLeft: spacing.l,
 })
 
 const buttonRowStyle = css({
@@ -93,8 +83,8 @@ export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPa
     const { intervals } = this.props
     const correctGuess = guesses.indexOf(interval) >= 0
     return (
-      <Card>
-        <CardContent direction={ContentDirection.Vertical}>
+      <Fragment>
+        <Content direction={ContentDirection.Vertical}>
           <TextBlock>
             <UnorderedList>
               <li>Listen to the interval, and pick the correct one from below!</li>
@@ -102,8 +92,8 @@ export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPa
               <li>Try humming/singing along!</li>
             </UnorderedList>
           </TextBlock>
-        </CardContent>
-        <CardContent direction={ContentDirection.Vertical}>
+        </Content>
+        <Content direction={ContentDirection.Vertical}>
           <div className={intervalContainerStyle}>
             <Intervals correctInterval={interval} intervals={intervals} guesses={guesses} onGuess={this.onGuess} />
           </div>
@@ -120,8 +110,8 @@ export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPa
               <span className={playButtonLabelStyle}>Next interval</span>
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </Content>
+      </Fragment>
     )
   }
 

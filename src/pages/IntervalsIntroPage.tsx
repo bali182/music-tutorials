@@ -1,18 +1,13 @@
 import React, { PureComponent } from 'react'
-import { Card } from '../ux/Card'
-import { CardContent, ContentDirection } from '../ux/CardContent'
-import { CardHeader } from '../ux/CardHeader'
-import { CardTitle } from '../ux/CardTitle'
+import { Content, ContentDirection } from '../ux/Content'
 import { TextBlock } from '../ux/TextBlock'
 
 export class IntervalsIntroPage extends PureComponent {
   render() {
     return (
-      <Card>
-        <CardContent direction={ContentDirection.Vertical}>
-          <TextBlock>Intervals reffer to the difference in pitch between two musical notes.</TextBlock>
-        </CardContent>
-      </Card>
+      <Content direction={ContentDirection.Vertical}>
+        <TextBlock>Intervals reffer to the difference in pitch between two musical notes.</TextBlock>
+      </Content>
     )
   }
 }

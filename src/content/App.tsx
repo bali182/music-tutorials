@@ -1,7 +1,7 @@
 import { css } from 'emotion'
 import React, { PureComponent } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
-import { Content } from './Content'
+import { HashRouter } from 'react-router-dom'
+import { PageContent } from './PageContent'
 import { NavigationPanel } from './NavigationPanel'
 
 const appStyle = css({
@@ -16,7 +16,7 @@ export class App extends PureComponent {
       <HashRouter>
         <div className={appStyle}>
           <NavigationPanel />
-          <Content />
+          <PageContent />
         </div>
       </HashRouter>
     )
