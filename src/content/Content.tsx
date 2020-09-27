@@ -7,6 +7,8 @@ import { flatRoutes } from './routes'
 const contentStyle = css({
   label: 'content',
   width: '100%',
+  height: '100vh',
+  overflow: 'auto',
   display: 'flex',
   flexDirection: 'column',
 })

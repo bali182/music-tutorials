@@ -16,13 +16,14 @@ const intervalButtonContainerStyle = css({
 
 export type IntervalsWithInverseProps = {
   intervals?: number[]
+  onIntervalClicked: (interval: number, isInverse: boolean) => void
 }
 
 export class IntervalsWithInverse extends PureComponent<IntervalsWithInverseProps> {
   private renderInterval(interval: number) {
     return (
       <div className={intervalButtonContainerStyle} key={interval}>
-        <IntervalWithInverseButton interval={interval} />
+        <IntervalWithInverseButton interval={interval} onClick={this.props.onIntervalClicked} />
       </div>
     )
   }
