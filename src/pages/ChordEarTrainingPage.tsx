@@ -48,10 +48,6 @@ const nextButtonStyle = css({
   flexBasis: '1px',
 })
 
-const playButtonLabelStyle = css({
-  marginLeft: spacing.s,
-})
-
 export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProps, ChordEarTrainingPageState> {
   private synth: PolySynth = createDefaultSynth()
   state: ChordEarTrainingPageState = this.getNextState()
@@ -104,16 +100,19 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
             />
           </div>
           <div className={buttonRowStyle}>
-            <Button onClick={this.playInterval} className={playButtonStyle} kind={ButtonKind.Secondary}>
-              <FontAwesomeIcon icon={faVolumeUp} />
-              <span className={playButtonLabelStyle}>Play chord</span>
+            <Button
+              icon={faVolumeUp}
+              onClick={this.playInterval}
+              className={playButtonStyle}
+              kind={ButtonKind.Secondary}>
+              Play chord
             </Button>
             <Button
               onClick={this.onNext}
               className={nextButtonStyle}
               disabled={!correctGuess}
               kind={ButtonKind.Primary}>
-              <span className={playButtonLabelStyle}>Next chord</span>
+              Next chord
             </Button>
           </div>
         </Content>

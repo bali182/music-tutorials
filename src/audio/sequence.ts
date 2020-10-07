@@ -22,12 +22,16 @@ export function playSequence(sequence: Sequence) {
   sequence.start()
 }
 
-export const createInterval = (noteA: string, range: number) => (synth: PolySynth): Sequence => {
+export const createInterval = (noteA: string, range: number, arpeggiate: boolean) => (synth: PolySynth): Sequence => {
   const interval = Interval.fromSemitones(range)
   const noteB = Note.transpose(noteA, interval)
   const sequence = createSequence(synth, [
-    { note: noteA, duration: '8n' },
-    { note: noteB, duration: '8n' },
+    ...(arpeggiate
+      ? [
+          { note: noteA, duration: '8n' },
+          { note: noteB, duration: '8n' },
+        ]
+      : []),
     { note: [noteA, noteB], duration: '4n' },
   ])
   return sequence
@@ -44,10 +48,12 @@ export const createReverseInterval = (noteB: string, range: number) => (synth: P
   return sequence
 }
 
-export const createRandomInterval = (range: number, scaleRoot: string = 'a3') => (synth: PolySynth): Sequence => {
+export const createRandomInterval = (range: number, arpeggiate: boolean, scaleRoot: string = 'a3') => (
+  synth: PolySynth
+): Sequence => {
   const scale = Scale.get(`${scaleRoot} chromatic`)
   const noteA = sample(scale.notes)
-  return createInterval(noteA, range)(synth)
+  return createInterval(noteA, range, arpeggiate)(synth)
 }
 
 export const createRandomChord = (chordType: ChordType, playNotes: boolean, scaleRoot: string = 'a3') => (

@@ -13,7 +13,7 @@ export function getIntervalName(interval: number) {
     case 5:
       return 'Perfect 4th'
     case 6:
-      return 'Tritone (Diminished 5th or Augmented 4th)'
+      return 'Tritone'
     case 7:
       return 'Perfect 5th'
     case 8:

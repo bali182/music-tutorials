@@ -8,7 +8,6 @@ const titleStyle = css({
   fontSize: '1.5em',
   fontWeight: 'bold',
   opacity: 1,
-  margin: '14px 14px 8px 14px',
 })
 
 type TitleProps = {

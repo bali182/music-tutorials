@@ -1,4 +1,6 @@
 import React, { ComponentType } from 'react'
+import { ConfigurableProps, ConfiguratorProps } from '../configuration/configurationTypes'
+import { IntervalEarTrainingConfigurator } from '../configuration/IntervalEarTrainingConfigurator'
 import { ChordEarTrainingPage } from '../pages/ChordEarTrainingPage'
 import { IntervalEarTrainingPage } from '../pages/IntervalEarTrainingPage'
 import { IntervalsInOctavePage } from '../pages/IntervalsInOctavePage'
@@ -13,79 +15,39 @@ export type RouteDescriptor = {
   id: string
   label: string
   children?: RouteDescriptor[]
-  component?: ComponentType
+  configComponent?: ComponentType<ConfiguratorProps<any>>
+  component?: ComponentType<ConfigurableProps<any>>
 }
 
 export const routes: RouteDescriptor[] = allWithQualifiedIds([
   {
     id: 'scales',
     label: 'Scales',
-    children: [{ id: 'pentatonic-scale', label: 'Pentatonic scale', component: PentatonicPage }],
+    children: [{ id: 'pentatonic-scale', label: 'Pentatonic scale', component: PentatonicPage as any }],
   },
   {
     id: 'intervals',
     label: 'Intervals',
-    component: IntervalsIntroPage,
+    component: IntervalsIntroPage as any,
     children: [
       {
         id: 'theory',
         label: 'Theory',
         children: [
-          { id: 'intervals-in-an-octave', label: 'Intervals in an octave', component: IntervalsInOctavePage },
-          { id: 'inversions-of-intervals', label: 'Inversions of intervals', component: InversionsOfIntervalsPage },
+          { id: 'intervals-in-an-octave', label: 'Intervals in an octave', component: IntervalsInOctavePage as any },
+          {
+            id: 'inversions-of-intervals',
+            label: 'Inversions of intervals',
+            component: InversionsOfIntervalsPage as any,
+          },
           { id: 'extended-intervals', label: 'Extended intervals' },
         ],
       },
       {
         id: 'ear-training',
         label: 'Ear training',
-        children: [
-          {
-            id: 'major-and-minor-seconds',
-            label: 'Major and minor 2nd',
-            component: () => <IntervalEarTrainingPage intervals={[1, 2]} />,
-          },
-          {
-            id: 'major-and-minor-thirds',
-            label: 'Major and minor 3rd',
-            component: () => <IntervalEarTrainingPage intervals={[3, 4]} />,
-          },
-          {
-            id: 'seconds-and-thirds',
-            label: '2nd and 3rd',
-            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4]} />,
-          },
-          {
-            id: 'perfect-fourth-and-fifth',
-            label: 'Perfect 4th, tritone and perfect 5th',
-            component: () => <IntervalEarTrainingPage intervals={[5, 6, 7]} />,
-          },
-          {
-            id: 'seconds-thirds-fourths-fifths',
-            label: '2nd, 3rd, 4th, and 5th',
-            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4, 5, 6, 7]} />,
-          },
-          {
-            id: 'major-and-minor-sixths',
-            label: 'Major and minor 6th',
-            component: () => <IntervalEarTrainingPage intervals={[8, 9]} />,
-          },
-          {
-            id: 'seconds-thirds-fourths-fifths-sixths',
-            label: '2nd, 3rd, 4th, 5th and 6th',
-            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4, 5, 6, 7, 8, 9]} />,
-          },
-          {
-            id: 'major-and-minor-sevenths',
-            label: 'Major and minor 7th',
-            component: () => <IntervalEarTrainingPage intervals={[10, 11]} />,
-          },
-          {
-            id: 'intervals-in-octave',
-            label: 'All intervals in an octave',
-            component: () => <IntervalEarTrainingPage intervals={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} />,
-          },
-        ],
+        component: IntervalEarTrainingPage,
+        configComponent: IntervalEarTrainingConfigurator,
       },
     ],
   },
@@ -97,7 +59,7 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
         id: 'theory',
         label: 'Theory',
         children: [
-          { id: 'triads', label: 'Triads (Major, minor, diminished, augmented)', component: TriadsPage },
+          { id: 'triads', label: 'Triads (Major, minor, diminished, augmented)', component: TriadsPage as any },
           { id: 'sevenths', label: 'Extended 7th chords' },
           { id: 'ninths', label: 'Extended 9th chords' },
           { id: 'suspended', label: 'Suspended (sus2, sus4 and add9) chords' },

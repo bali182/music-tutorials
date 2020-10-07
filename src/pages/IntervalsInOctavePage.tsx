@@ -15,7 +15,7 @@ export class IntervalsInOctavePage extends PureComponent {
       this.sequence.stop()
       this.sequence.dispose()
     }
-    this.sequence = createInterval('c4', interval)(this.synth)
+    this.sequence = createInterval('c4', interval, true)(this.synth)
     playSequence(this.sequence)
   }
 

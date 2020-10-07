@@ -17,7 +17,7 @@ export class InversionsOfIntervalsPage extends PureComponent {
     }
     this.sequence = isInverse
       ? createReverseInterval('c5', interval)(this.synth)
-      : createInterval('c4', interval)(this.synth)
+      : createInterval('c4', interval, true)(this.synth)
     playSequence(this.sequence)
   }
 

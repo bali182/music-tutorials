@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react'
 import { css } from 'emotion'
-import { colors } from './constants'
+import { colors, spacing } from './constants'
 
 const headerStyle = css({
   label: 'header',
@@ -9,8 +9,9 @@ const headerStyle = css({
   height: '80px',
   display: 'flex',
   flexShrink: 0,
-  flexDirection: 'column',
-  justifyContent: 'center',
+  flexDirection: 'row',
+  alignItems: 'center',
+  padding: spacing.m,
   borderBottomColor: colors.lightGray,
   borderBottomStyle: 'solid',
   borderBottomWidth: '1px',
