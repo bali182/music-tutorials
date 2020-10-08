@@ -5,6 +5,11 @@ export type ConfiguratorProps<T> = {
   onChange: (value: T) => void
 }
 
+export type ConfigurationTemplate<T> = {
+  name: string
+  template: T
+}
+
 export type ConfigurableProps<T> = {
   configuration: T
 }
@@ -15,6 +20,6 @@ export type IntervalEarTrainingConfiguration = {
 }
 
 export type ChordEarTrainingConfiguration = {
-  intervals: ChordType[]
+  chordsTypes: ChordType[]
   arpeggiate: boolean
 }

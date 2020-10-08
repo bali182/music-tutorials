@@ -1,5 +1,5 @@
 import { Interval, Note, Scale, transpose } from '@tonaljs/tonal'
-import { sample } from 'lodash'
+import { isNil, sample } from 'lodash'
 import { Sequence, PolySynth, start, Transport } from 'tone'
 import { ChordType } from '../ux/ChordEarTraining/ChordType'
 import { getChordIntervals } from '../ux/ChordEarTraining/getChordIntervals'
@@ -17,9 +17,14 @@ export function createSequence(synth: PolySynth, notes: AudioNote[]): Sequence {
 export function playSequence(sequence: Sequence) {
   start()
   Transport.stop()
-  sequence.stop()
+  sequence?.stop()
   Transport.start()
-  sequence.start()
+  sequence?.start()
+}
+
+export function destroySequence(sequence: Sequence) {
+  sequence?.stop()
+  sequence?.dispose()
 }
 
 export const createInterval = (noteA: string, range: number, arpeggiate: boolean) => (synth: PolySynth): Sequence => {
@@ -56,11 +61,14 @@ export const createRandomInterval = (range: number, arpeggiate: boolean, scaleRo
   return createInterval(noteA, range, arpeggiate)(synth)
 }
 
-export const createRandomChord = (chordType: ChordType, playNotes: boolean, scaleRoot: string = 'a3') => (
+export const createRandomChord = (chordType: ChordType, arpeggiate: boolean, scaleRoot: string = 'a3') => (
   synth: PolySynth
 ): Sequence => {
   const scale = Scale.get(`${scaleRoot} chromatic`)
   const relativeIntervals = getChordIntervals(chordType)
+  if (isNil(relativeIntervals)) {
+    return null
+  }
   const intervals = relativeIntervals
     .map((_, idx) => relativeIntervals.slice(0, idx + 1).reduce((a, b) => a + b, 0))
     .map((range) => Interval.fromSemitones(range))
@@ -68,5 +76,5 @@ export const createRandomChord = (chordType: ChordType, playNotes: boolean, scal
   const notes = intervals.map((interval) => transpose(root, interval))
   const individuallyPlayedNotes = notes.map((note): AudioNote => ({ note, duration: '8n' }))
   const chordNotes = [{ note: notes, duration: '4n' }]
-  return createSequence(synth, playNotes ? individuallyPlayedNotes.concat(chordNotes) : chordNotes)
+  return createSequence(synth, arpeggiate ? individuallyPlayedNotes.concat(chordNotes) : chordNotes)
 }

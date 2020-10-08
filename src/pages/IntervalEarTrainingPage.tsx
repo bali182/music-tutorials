@@ -1,11 +1,10 @@
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from 'emotion'
 import { sample } from 'lodash'
 import React, { Fragment, PureComponent } from 'react'
 import { PolySynth, Sequence, start, Transport } from 'tone'
 import { createDefaultSynth } from '../audio/defaultSynth'
-import { createRandomInterval, playSequence } from '../audio/sequence'
+import { createRandomInterval, destroySequence, playSequence } from '../audio/sequence'
 import { Button, ButtonKind } from '../ux/Button'
 import { Content, ContentDirection } from '../ux/Content'
 import { spacing } from '../ux/constants'
@@ -58,15 +57,8 @@ export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPa
   }
 
   private onNext = () => {
-    this.state.sequence.stop()
-    this.state.sequence.dispose()
+    destroySequence(this.state.sequence)
     this.setState(this.getNextState())
-  }
-
-  componentDidUpdate(prevProps: IntervalEarTrainingPageProps) {
-    if (prevProps.configuration !== this.props.configuration) {
-      this.onNext()
-    }
   }
 
   componentDidMount() {
@@ -76,8 +68,7 @@ export class IntervalEarTrainingPage extends PureComponent<IntervalEarTrainingPa
   }
 
   componentWillUnmount() {
-    this.state.sequence.stop()
-    this.state.sequence.dispose()
+    destroySequence(this.state.sequence)
   }
 
   private getConfiguration() {

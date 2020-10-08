@@ -1,11 +1,10 @@
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from 'emotion'
 import { sample } from 'lodash'
 import React, { Fragment, PureComponent } from 'react'
 import { PolySynth, Sequence, start, Transport } from 'tone'
 import { createDefaultSynth } from '../audio/defaultSynth'
-import { createRandomChord, playSequence } from '../audio/sequence'
+import { createRandomChord, destroySequence, playSequence } from '../audio/sequence'
 import { Button, ButtonKind } from '../ux/Button'
 import { Content, ContentDirection } from '../ux/Content'
 import { ChordsEarTraining } from '../ux/ChordEarTraining/ChordsEarTraining'
@@ -13,10 +12,9 @@ import { ChordType } from '../ux/ChordEarTraining/ChordType'
 import { spacing } from '../ux/constants'
 import { TextBlock } from '../ux/TextBlock'
 import { UnorderedList } from '../ux/UnorderedList'
+import { ChordEarTrainingConfiguration, ConfigurableProps } from '../configuration/configurationTypes'
 
-type ChordEarTrainingPageProps = {
-  chordTypes: ChordType[]
-}
+type ChordEarTrainingPageProps = ConfigurableProps<ChordEarTrainingConfiguration>
 
 type ChordEarTrainingPageState = {
   sequence: Sequence
@@ -59,8 +57,7 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
   }
 
   private onNext = () => {
-    this.state.sequence.stop()
-    this.state.sequence.dispose()
+    destroySequence(this.state.sequence)
     this.setState(this.getNextState())
   }
 
@@ -71,13 +68,16 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
   }
 
   componentWillUnmount() {
-    this.state.sequence.stop()
-    this.state.sequence.dispose()
+    destroySequence(this.state.sequence)
+  }
+
+  private getConfiguration(): ChordEarTrainingConfiguration {
+    return this.props.configuration || { arpeggiate: false, chordsTypes: [] }
   }
 
   render() {
     const { guesses, chordType } = this.state
-    const { chordTypes } = this.props
+    const config = this.getConfiguration()
     const correctGuess = guesses.indexOf(chordType) >= 0
     return (
       <Fragment>
@@ -94,7 +94,7 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
           <div className={intervalContainerStyle}>
             <ChordsEarTraining
               correctChordType={chordType}
-              chordTypes={chordTypes}
+              chordTypes={config.chordsTypes}
               guesses={guesses}
               onGuess={this.onGuess}
             />
@@ -121,11 +121,12 @@ export class ChordEarTrainingPage extends PureComponent<ChordEarTrainingPageProp
   }
 
   private getNextState(): ChordEarTrainingPageState {
-    const chordType = sample(this.props.chordTypes)
+    const config = this.getConfiguration()
+    const chordType = sample(config.chordsTypes)
     return {
       chordType,
       guesses: [],
-      sequence: createRandomChord(chordType, false)(this.synth),
+      sequence: createRandomChord(chordType, config.arpeggiate)(this.synth),
     }
   }
 }

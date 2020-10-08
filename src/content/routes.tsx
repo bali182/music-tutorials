@@ -1,5 +1,6 @@
 import React, { ComponentType } from 'react'
-import { ConfigurableProps, ConfiguratorProps } from '../configuration/configurationTypes'
+import { ChordEarTrainingConfigurator } from '../configuration/ChordEarTrainingConfigurator'
+import { ConfigurableProps, ConfigurationTemplate, ConfiguratorProps } from '../configuration/configurationTypes'
 import { IntervalEarTrainingConfigurator } from '../configuration/IntervalEarTrainingConfigurator'
 import { ChordEarTrainingPage } from '../pages/ChordEarTrainingPage'
 import { IntervalEarTrainingPage } from '../pages/IntervalEarTrainingPage'
@@ -11,15 +12,16 @@ import { TriadsPage } from '../pages/TriadsPage'
 import { ChordType } from '../ux/ChordEarTraining/ChordType'
 import { allWithQualifiedIds, flattenRoutes } from './routeUtils'
 
-export type RouteDescriptor = {
+export type RouteDescriptor<T = any> = {
   id: string
   label: string
+  templates?: ConfigurationTemplate<T>[]
   children?: RouteDescriptor[]
-  configComponent?: ComponentType<ConfiguratorProps<any>>
-  component?: ComponentType<ConfigurableProps<any>>
+  configComponent?: ComponentType<ConfiguratorProps<T>>
+  component?: ComponentType<ConfigurableProps<T>>
 }
 
-export const routes: RouteDescriptor[] = allWithQualifiedIds([
+export const routes: RouteDescriptor<any>[] = allWithQualifiedIds([
   {
     id: 'scales',
     label: 'Scales',
@@ -44,7 +46,7 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
         ],
       },
       {
-        id: 'ear-training',
+        id: 'intervals-ear-training',
         label: 'Ear training',
         component: IntervalEarTrainingPage,
         configComponent: IntervalEarTrainingConfigurator,
@@ -66,34 +68,10 @@ export const routes: RouteDescriptor[] = allWithQualifiedIds([
         ],
       },
       {
-        id: 'ear-training',
+        id: 'chords-ear-training',
         label: 'Ear training',
-        children: [
-          {
-            id: 'triads',
-            label: 'Triads (Major, minor, diminished, augmented)',
-            component: () => (
-              <ChordEarTrainingPage
-                chordTypes={[ChordType.DiminishedTriad, ChordType.MajorTriad, ChordType.MinorTriad]}
-              />
-            ),
-          },
-          {
-            id: 'sevenths',
-            label: 'Extended 7th chords',
-            component: () => <ChordEarTrainingPage chordTypes={[ChordType.MajorSeventh, ChordType.MinorSeventh]} />,
-          },
-          {
-            id: 'ninths',
-            label: 'Extended 9th chords',
-            component: () => <ChordEarTrainingPage chordTypes={[ChordType.MajorNinth, ChordType.MinorNinth]} />,
-          },
-          {
-            id: 'suspended',
-            label: 'Suspended (sus2, sus4) chords',
-            component: () => <ChordEarTrainingPage chordTypes={[ChordType.Suspended2, ChordType.Suspended4]} />,
-          },
-        ],
+        component: ChordEarTrainingPage,
+        configComponent: ChordEarTrainingConfigurator,
       },
     ],
   },

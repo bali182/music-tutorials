@@ -9,6 +9,7 @@ import { FallbackPage } from '../pages/FallbackPage'
 import { Button, ButtonKind } from '../ux/Button'
 import { Dialog } from '../ux/Dialog'
 import { Header } from '../ux/Header'
+import { DocumentTitle } from '../ux/PageTitle'
 import { Title } from '../ux/Title'
 import { flatRoutes, RouteDescriptor } from './routes'
 
@@ -94,13 +95,14 @@ export class _PageContent extends PureComponent<RouteComponentProps, PageContent
     const configuration = JSON.parse(localStorage.getItem(route?.id))
     return (
       <div className={pageContentStyle}>
+        <DocumentTitle title={route.label} />
         <Header>
           <Title className={titleStyle}>{this.getPageTitle(route)}</Title>
           {this.renderConfigButton(route)}
         </Header>
         {this.renderConfigDialog(route, configuration)}
         <Switch>
-          {this.renderRoutes(configuration)}
+          {this.state.isConfigurationOpen ? null : this.renderRoutes(configuration)}
           <Route path="/" exact={true} component={FallbackPage} />
         </Switch>
       </div>
