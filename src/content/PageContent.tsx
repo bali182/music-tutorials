@@ -5,6 +5,7 @@ import { isNil } from 'lodash'
 import React, { PureComponent } from 'react'
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom'
 import { ConfigurationDialog } from '../configuration/ConfigurationDialog'
+import { EmptyConfig } from '../configuration/EmptyConfig'
 import { FallbackPage } from '../pages/FallbackPage'
 import { Button, ButtonKind } from '../ux/Button'
 import { Dialog } from '../ux/Dialog'
@@ -90,19 +91,34 @@ export class _PageContent extends PureComponent<RouteComponentProps, PageContent
       />
     )
   }
+  private renderContent(route: RouteDescriptor, config: any) {
+    const { isConfigurationOpen } = this.state
+    if (isConfigurationOpen) {
+      return null
+    }
+    if (
+      !isConfigurationOpen &&
+      !isNil(route?.configComponent) &&
+      !isNil(route?.isConfigValid) &&
+      !route.isConfigValid(config)
+    ) {
+      return <EmptyConfig label="Click here to configure the tool!" onClick={this.onConfigurationOpened} />
+    }
+    return this.renderRoutes(config)
+  }
   render() {
     const route = this.getActiveRoute()
-    const configuration = JSON.parse(localStorage.getItem(route?.id))
+    const config = JSON.parse(localStorage.getItem(route?.id))
     return (
       <div className={pageContentStyle}>
-        <DocumentTitle title={route.label} />
+        <DocumentTitle title={route?.label} />
         <Header>
           <Title className={titleStyle}>{this.getPageTitle(route)}</Title>
           {this.renderConfigButton(route)}
         </Header>
-        {this.renderConfigDialog(route, configuration)}
+        {this.renderConfigDialog(route, config)}
         <Switch>
-          {this.state.isConfigurationOpen ? null : this.renderRoutes(configuration)}
+          {this.renderContent(route, config)}
           <Route path="/" exact={true} component={FallbackPage} />
         </Switch>
       </div>

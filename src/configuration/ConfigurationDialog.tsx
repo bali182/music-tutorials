@@ -47,6 +47,7 @@ export class ConfigurationDialog extends PureComponent<ConfigurationDialogProps,
 
   private onSave = () => {
     const { value } = this.state
+    console.log('Saving config:', value)
     const { onSave } = this.props
     onSave(value)
   }
