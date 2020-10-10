@@ -14,6 +14,7 @@ import { IntervalEarTrainingPage } from '../pages/IntervalEarTrainingPage'
 import { IntervalsInOctavePage } from '../pages/IntervalsInOctavePage'
 import { IntervalsIntroPage } from '../pages/IntervalsIntroPage'
 import { InversionsOfIntervalsPage } from '../pages/InversionsOfIntervalsPage'
+import { NotePracticingPage } from '../pages/NotePracticingPage'
 import { PentatonicPage } from '../pages/PentatonicPage'
 import { allWithQualifiedIds, flattenRoutes } from './routeUtils'
 
@@ -47,6 +48,11 @@ export const routes: RouteDescriptor<any>[] = allWithQualifiedIds([
         isConfigValid: (config: ChordEarTrainingConfiguration) =>
           !isNil(config) && !isNil(config.chordsTypes) && config.chordsTypes.length > 0,
         configComponent: ChordEarTrainingConfigurator,
+      },
+      {
+        id: 'notes-training',
+        label: 'Notes training',
+        component: NotePracticingPage as any,
       },
     ],
   },

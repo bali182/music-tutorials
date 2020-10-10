@@ -36,7 +36,7 @@ export const spacing = {
 
 export const shadow = {
   small: '0px 0px 2px 0px rgba(0,0,0,0.3);',
-  default: '0px 0px 15px 0px rgba(0,0,0,0.3);',
+  default: '0px 2px 6px 0px rgba(0,0,0,0.25);',
 }
 
 export const transition = {

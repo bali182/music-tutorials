@@ -23,3 +23,8 @@ export type ChordEarTrainingConfiguration = {
   chordsTypes: ChordType[]
   arpeggiate: boolean
 }
+
+export type NotesEarTrainingConfiguration = {
+  notes: string[]
+  time: number
+}
